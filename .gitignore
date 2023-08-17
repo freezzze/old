@@ -1,0 +1,14 @@
+Terraform/ansible/.terraform
+Terraform/ansible/.terraform.lock.hcl
+Terraform/ansible/.tflint.hcl
+Terraform/ansible/key.json
+Terraform/ansible/secrets.auto.tfvars
+Terraform/ansible/terraform.tfstate
+Terraform/ansible/terraform.tfstate.backup
+Terraform/balancer/.terraform
+Terraform/balancer/.terraform.lock.hcl
+Terraform/balancer/.tflint.hcl
+Terraform/balancer/key.json
+Terraform/balancer/secrets.auto.tfvars
+Terraform/balancer/terraform.tfstate
+Terraform/balancer/terraform.tfstate.backup

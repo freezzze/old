@@ -1,0 +1,21 @@
+---
+- name: RouterOS test with network_cli connection
+  hosts: all
+  gather_facts: true 
+  tasks:
+  - name: Disable task
+    community.routeros.command:
+      commands: system scheduler disable Export_config_file_to_email
+
+  - name: Gather system resources
+    community.routeros.command:
+      commands: /system scheduler print
+    register: system_scheduler_print
+
+  - name: Show system schedulers
+    debug:
+      var: system_scheduler_print.stdout_lines
+
+  - name: Show a fact
+    debug:
+      msg: "First IP address: {{ ansible_net_all_ipv4_addresses[0] }}"

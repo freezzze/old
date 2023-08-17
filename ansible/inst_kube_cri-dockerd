@@ -1,0 +1,29 @@
+#!/bin/bash
+echo "-----------"
+echo -e "\033[38;2;169;169m==========|\033[m \033[1;32mRemove all docker\033[m \033[38;2;169;169m|===============================================\033[m"
+echo "-----------"
+sudo apt remove docker docker-engine docker.io 2>/dev/null
+echo "-----------"
+echo -e "\033[38;2;169;169m==========|\033[m \033[1;32mRemove is OK\033[m \033[38;2;169;169m|=====================================================\033[m"
+echo "-----------"
+echo -e "\033[38;2;169;169m==========|\033[m \033[1;32mInstall kubelet, kubeadm and kubectl docker cri-dockerd\033[m \033[38;2;169;169m|==========\033[m"
+sudo apt update 2>/dev/null
+sudo apt -y install vim git wget curl lsb-release cowsay gnupg apt-transport-https ca-certificates curl software-properties-common 2>/dev/null
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt update 2>/dev/null
+sudo apt -y install kubelet kubeadm kubectl docker-ce 2>/dev/null
+sudo apt-mark hold kubelet kubeadm kubectl
+#sudo usermod -aG docker $USER
+#newgrp docker
+VER=$(curl -s https://api.github.com/repos/Mirantis/cri-dockerd/releases/latest|grep tag_name | cut -d '"' -f 4|sed 's/v//g')
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v${VER}/cri-dockerd-${VER}.amd64.tgz
+tar xvf cri-dockerd-${VER}.amd64.tgz
+rm cri-dockerd-${VER}.amd64.tgz
+sudo mv cri-dockerd/cri-dockerd /usr/local/bin/
+echo "-----------"
+echo -e "\033[38;2;169;169m==========|\033[m \033[1;32mInstall is OK\033[m \033[38;2;169;169m|=====================================================\033[m"
+echo "-----------"
+echo -e "\033[38;2;169;169m-----------\033[m \033[1;32mIt's all )\033[m \033[38;2;169;169m-----------\033[m" | cowsay; sleep 1

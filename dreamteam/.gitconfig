@@ -1,0 +1,5 @@
+[user]
+	email = rada611@gmail.com
+	name = Александр Морозов
+[alias]
+	history = log --graph

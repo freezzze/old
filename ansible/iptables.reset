@@ -1,0 +1,14 @@
+#!/bin/bash
+colGreen="\033[32m"
+resetCol="\033[0m"
+echo -n "Flushing firewall rules and changing default policy to ACCEPT..."
+iptables -F
+iptables -X
+iptables -t nat -F
+iptables -t nat -X
+iptables -t mangle -F
+iptables -t mangle -X
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+echo -e "$colGreen Done! $resetCol"
