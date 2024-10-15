@@ -2,8 +2,9 @@
 #скрипт настраивает работу от имени пользователя ubuntu без ввода пароля и правит ip-адрес и имя хоста (запрашивает)
 #запускать так (передаём значения напрямую) 'curl https://raw.githubusercontent.com/freezzze/old/main/lil_config.sh | sudo bash -s 10.221.12.182 node2'
 
-ip_address=$1
-host_name=$2
+# Запрос ввода у пользователя
+read -p "Введите IP-адрес: " ip_address
+read -p "Введите имя хоста: " host_name
 
 # Проверка наличия аргументов
 if [ -z "$ip_address" ] || [ -z "$host_name" ]; then
