@@ -5,6 +5,12 @@
 ip_address=$1
 host_name=$2
 
+# Проверка наличия аргументов
+if [ -z "$ip_address" ] || [ -z "$host_name" ]; then
+    echo "Usage: $0 <ip_address> <host_name>"
+    exit 1
+fi
+
 echo "ubuntu ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/ubuntu
 sudo hostnamectl hostname $host_name
 sudo sed -i "s/10.221.12.181\/24/$ip_address\/24/" /etc/netplan/00-installer-config.yaml
