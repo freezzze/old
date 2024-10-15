@@ -6,10 +6,8 @@
 
 echo "Введите ip адрес:"
 read ip_address
-#ip_address=$1
 echo "Введите hostname:"
 read host_name
-#host_name=$2
 
 echo "ubuntu ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/ubuntu
 sudo hostnamectl hostname $host_name
